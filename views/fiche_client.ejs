@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche Client</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+      body {
+  background: url(box.jpg) no-repeat;
+  width: 100%;
+  min-height: 100vh;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+
+table caption {
+  font-size: 1.5em;
+  margin: .5em 0 .75em;
+}
+
+table tr {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em;
+}
+
+table th{
+color: #f8f8f8;
+  padding: .625em;
+  text-align: center;
+}
+table td {
+  padding: .625em;
+  text-align: center;
+}
+
+table th {
+  background-color: #ff0266;
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+  }
+
+  table caption {
+    font-size: 1.3em;
+  }
+  
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+  
+  table td::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  table td:last-child {
+    border-bottom: 0;
+  }
+}
+body {
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.25;
+}
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+
+/* CRD */
+
+form {
+padding: 30px;
+border-radius: 10px;
+}
+form h1 {
+font-size: 20px;
+}
+form .separation {
+width: 25%;
+height: 4px;
+background-color: #ff0266;
+}
+form .corps-formulaire {
+display: flex;
+justify-content: center;
+flex-direction: row;
+flex-wrap: wrap;
+
+}
+
+form .corps-formulaire .groupe {
+margin-top: 10px;
+}
+form .corps-formulaire .gauche .groupe input {
+margin-top: 5px;
+padding: 10px 5px 10px 30px;
+border: 1px solid #c9c9c9;
+outline-color: #ff0266;
+border-radius: 5px;
+}
+form .corps-formulaire .gauche .groupe i {
+position: absolute; /* positionné par rapport à son parent le plus proche positionné */
+left: 0;
+top: 25px;
+padding: 9px 8px;
+color: #ff0266;
+}
+form .pied-formulaire button.aj {
+  margin-top: 610px;
+  margin-left: -480px;
+  background-color: #ff0266;
+  color: white;
+  font-size: 15px;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  transition: transform 0.5s;
+}
+form .pied-formulaire button.mod {
+margin-top: 745px;
+margin-left: -850px;
+background-color: #ff0266;
+color: white;
+font-size: 15px;
+border: none;
+padding: 10px 20px;
+border-radius: 5px;
+outline: none;
+cursor: pointer;
+transition: transform 0.5s;
+}
+form .pied-formulaire button.sup{
+  margin-top: 30px;
+  margin-left: -330px;
+  background-color: #ff0266;
+  color: white;
+  font-size: 15px;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  transition: transform 0.5s;
+}
+
+form .pied-formulaire button:hover {
+transform: scale(1.05);
+}
+
+@media screen and (max-width: 920px) {
+form .corps-formulaire .droite {
+  margin-left: 0px;
+}
+}
+
+    </style>
+</head>
+<body>
+<section>
+    <table>
+        <caption>Fiche Client</caption>
+        <thead>
+          <tr>
+            <th>code</th>
+            <th>raison social</th>
+            <th>adresse</th>
+            <th>ville</th>
+            <th>email</th>
+            <th>telephone</th>
+            <th>compte comptable</th>
+            <th>delai</th>
+          </tr>
+        </thead>
+        <tbody>
+            <% users.forEach(user => { %>
+                <tr>
+                    <td><%= user.code %></td>
+                    <td><%= user.raison_social %></td>
+                    <td><%= user.adresse %></td>
+                    <td><%= user.ville %></td>
+                    <td><%= user.email %></td>
+                    <td><%= user.tel %></td>
+                    <td><%= user.compte_comptable %></td>
+                    <td><%= user.delai %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+      </table>
+</section>
+<section>
+<form class="card" action="/fiche_client/submit" method="post">
+    <h1>Ajouter un Client</h1>
+    <div class="separation"></div>
+    <div class="corps-formulaire">
+      <div class="gauche">
+        <div class="groupe">
+            <label for="raison_social">Raison Social <span class="star"
+                >*</span></label><br><br>
+             <input type="text" placeholder="Votre raison social" required
+                class="input" id="raison_social" name="raison_social">
+        </div>
+        <div class="groupe">
+          <label for="addresse">Address :</label>
+          <textarea name="adresse" id="adresse" cols="30" rows="10" required></textarea>
+             </div>
+        <div class="groupe">
+          <label for="ville">Ville :</label>
+          <select name="ville" id="ville">
+              <option value="1">casablanca</option>
+              <option value="2">rabat</option>
+              <option value="3">agadir</option>
+          </select>
+        </div>
+        <div class="groupe">
+            <label for="email ">Email   <span class="star"
+                >*</span> </label><br>
+                <input type="email" placeholder= "Votre email" required
+                class="input" id="email" name="email">
+        </div>
+        <div class="groupe">
+            <label for="tel">Telephone  <span class="star"
+                >*</span> </label><br>
+                <input type="text" placeholder= "Votre telephone" required
+                class="input" id="tel" name="tel">
+        </div>
+        <div class="groupe">
+            <label for="compte_comptable">Compte Comptable  <span class="star"
+                >*</span> </label><br>
+                <input type="text" placeholder= "Votre compte comptable" required
+                class="input" id="compte_comptable" name="compte_comptable">
+        </div>
+        <div class="groupe">
+          <label for="delai ">delai <span class="star"
+              >*</span> </label><br>
+              <input type="number" placeholder= "Votre delai" required
+              class="input" id="delai" name="delai">
+      </div>
+    </div>
+    <div class="pied-formulaire" align="center">
+      <button class="aj" >Ajouter</button>
+    </div>
+  </form>
+  <form class="card" action="/fiche_client/update" method="post">
+    <h1>Modifier un Client</h1>
+    <div class="separation"></div>
+    <div class="corps-formulaire">
+      <div class="gauche">
+        <h3> • entrer le code du client que vous souhaitez modifier.</h3> 
+        <div class="groupe">
+              <label for="code">code *  </label>
+                <input type="code" id="code" name="code"
+                placeholder= "Votre code"required>
+        </div>
+        <h3>• entrer ci dessous les nouveaux informations.</h3>
+        <div class="groupe">
+            <label for="raison_social">Raison Social  <span class="star"
+                >*</span> </label><br>
+                <input type="text" placeholder="Votre raison social" required
+                class="input" id="raison_social" name="raison_social" >
+        </div>
+        <div class="groupe">
+          <label for="addresse">Address :</label>
+          <textarea name="adresse" id="adresse" cols="30" rows="10" required></textarea>
+             </div>
+        <div class="groupe">
+          <label for="ville">Ville :</label>
+          <select name="ville" id="ville">
+              <option value="1">casablanca</option>
+              <option value="2">rabat</option>
+              <option value="3">agadir</option>
+          </select>
+        </div>
+        <div class="groupe">
+            <label for="email">Email   <span class="star"
+                >*</span> </label><br>
+                <input type="email" placeholder= "Votre email" required
+                class="input" id="email" name="email">
+        </div>
+        <div class="groupe">
+            <label for="tel">Telephone  <span class="star"
+                >*</span> </label><br>
+                <input type="text" placeholder= "Votre telephone" required
+                class="input" id="tel" name="tel">
+        </div>
+        <div class="groupe">
+            <label for="compte_comptable ">Compte Comptable  <span class="star"
+                >*</span> </label><br>
+                <input type="text" placeholder= "Votre compte comptable" required
+                class="input" id="compte_comptable" name="compte_comptable">
+        </div>
+        <div class="groupe">
+          <label for="delai ">delai <span class="star"
+              >*</span> </label><br>
+              <input type="number" placeholder= "Votre delai" required
+              class="input" id="delai" name="delai">
+      </div>
+    </div>
+    <div class="pied-formulaire" align="center">
+      <button class="mod">modifier</button>
+    </div>
+  </form>
+  <form class="card" action="/fiche_client/delete" method="post">
+    <h1>Supprimer un Client</h1>
+    <div class="separation"></div>
+    <div class="corps-formulaire">
+      <div class="gauche">
+        <h3>• entrer le code client que vous souhaitez supprimer.</h3> 
+        <div class="groupe">
+              <label for="code">code *  </label>
+                <input type="text" id="code" name="code" placeholder= "Votre code" required>
+        </div>
+    <div class="pied-formulaire" align="center">
+      <button class="sup">supprimer</button>
+    </div>
+  </form>
+</section>
+    </body>
+    </html>

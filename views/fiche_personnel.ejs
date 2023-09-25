@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fiche personnel</title>
+    <link rel="stylesheet" href="fiche_personnel.css">
+    <style>
+      body {
+    background: url(box.jpg) no-repeat;
+    width: 100%;
+    min-height: 100vh;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+  table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+  }
+  
+  table caption {
+    font-size: 1.5em;
+    margin: .5em 0 .75em;
+  }
+  
+  table tr {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: .35em;
+  }
+  
+  table th{
+color: #f8f8f8;
+    padding: .625em;
+    text-align: center;
+  }
+  table td {
+    padding: .625em;
+    text-align: center;
+  }
+  
+  table th {
+    background-color: #ff0266;
+    font-size: .85em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+  
+  @media screen and (max-width: 600px) {
+    table {
+      border: 0;
+    }
+  
+    table caption {
+      font-size: 1.3em;
+    }
+    
+    table thead {
+      border: none;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+    
+    table tr {
+      border-bottom: 3px solid #ddd;
+      display: block;
+      margin-bottom: .625em;
+    }
+    
+    table td {
+      border-bottom: 1px solid #ddd;
+      display: block;
+      font-size: .8em;
+      text-align: right;
+    }
+    
+    table td::before {
+      content: attr(data-label);
+      float: left;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    
+    table td:last-child {
+      border-bottom: 0;
+    }
+  }
+  body {
+    font-family: "Open Sans", sans-serif;
+    line-height: 1.25;
+  }
+  @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+
+/* CRD */
+
+form {
+  padding: 30px;
+  border-radius: 10px;
+}
+form h1 {
+  font-size: 20px;
+}
+form .separation {
+  width: 25%;
+  height: 4px;
+  background-color: #ff0266;
+}
+form .corps-formulaire {
+display: flex;
+justify-content: center;
+flex-direction: row;
+flex-wrap: wrap;
+
+}
+
+form .corps-formulaire .groupe {
+  margin-top: 10px;
+}
+form .corps-formulaire .gauche .groupe input {
+  margin-top: 5px;
+  padding: 10px 5px 10px 30px;
+  border: 1px solid #c9c9c9;
+  outline-color: #ff0266;
+  border-radius: 5px;
+}
+form .corps-formulaire .gauche .groupe i {
+  position: absolute; /* positionné par rapport à son parent le plus proche positionné */
+  left: 0;
+  top: 25px;
+  padding: 9px 8px;
+  color: #ff0266;
+}
+form .pied-formulaire button.aj {
+    margin-top: 520px;
+    margin-left: -480px;
+    background-color: #ff0266;
+    color: white;
+    font-size: 15px;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    transition: transform 0.5s;
+  }
+form .pied-formulaire button.mod {
+  margin-top: 650px;
+  margin-left: -850px;
+  background-color: #ff0266;
+  color: white;
+  font-size: 15px;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  transition: transform 0.5s;
+}
+form .pied-formulaire button.sup{
+    margin-top: 30px;
+    margin-left: -330px;
+    background-color: #ff0266;
+    color: white;
+    font-size: 15px;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    transition: transform 0.5s;
+  }
+
+form .pied-formulaire button:hover {
+  transform: scale(1.05);
+}
+
+@media screen and (max-width: 920px) {
+  form .corps-formulaire .droite {
+    margin-left: 0px;
+  }
+}
+
+    </style>
+</head>
+<body>
+
+<section>
+
+    <table>
+        <caption>Fiche Personnel</caption>
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>nom</th>
+            <th>date naissance</th>
+            <th>date embauche</th>
+            <th>service</th>
+            <th>fonction</th>
+            <th>salaire</th>
+            <th>prime</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% users.forEach(user => { %>
+              <tr>
+                  <td><%= user.id %></td>
+                  <td><%= user.nom %></td>
+                  <td><%= user.date_naissance %></td>
+                  <td><%= user.date_embauche %></td>
+                  <td><%= user.service %></td>
+                  <td><%= user.fonction %></td>
+                  <td><%= user.salaire %></td>
+                  <td><%= user.prime %></td>
+                  
+              </tr>
+          <% }); %>
+      </tbody>
+      </table>
+</section>
+<section>
+<form class="card" action="/fiche_personnel/submit" method="post">
+    <h1>Ajouter un Personnel</h1>
+    <div class="separation"></div>
+    <div class="corps-formulaire">
+      <div class="gauche">
+        <div class="groupe">
+            <label for="nom">Nom  <span class="star"
+                >*</span></label>
+             <input type="text" placeholder="Votre nom complet" required class="input" id="nom" name="nom">
+        </div>
+        <div class="groupe">
+            <label for="date_naissance">Date naissance <span class="star"
+                >*</span> </label><br>
+                <input type="date"required
+                class="input" id="date_naissance" name="date_naissance">
+             </div>
+             <div class="groupe">
+                <label for="date_embauche">Date embauche  <span class="star"
+                    >*</span> </label><br>
+                    <input type="date"required
+                    class="input" id="date_embauche" name="date_embauche"> 
+                 </div>
+        <div class="groupe">
+            <label for="service">Service  <span class="star"
+                >*</span> </label><br>
+                <input type="text" placeholder= "Votre Service" required
+                class="input" id="service" name="service">
+        </div>
+        <div class="groupe">
+            <label for="fonction">Fonction  <span class="star"
+                >*</span> </label><br>
+                <input type="text" placeholder= "Votre Fonction" required
+                class="input" id="fonction" name="fonction">
+        </div>
+        <div class="groupe">
+            <label for="salaire">Salaire  <span class="star"
+                >*</span> </label><br>
+                <input type="text" placeholder= "Votre Salaire" required
+                class="input" id="salaire" name="salaire">
+        </div>
+        <div class="groupe">
+            <label for="prime">Prime  <span class="star"
+                >*</span> </label><br>
+                <input type="text" placeholder= "Votre Prime" required
+                class="input" id="prime" name="prime">
+        </div>
+    </div>
+
+    <div class="pied-formulaire" align="center">
+      <button class="aj" type="submit">Ajouter</button>
+    </div>
+  </form>
+  <form class="card" action="/fiche_personnel/update" method="post">
+    <h1>Modifier un personnel</h1>
+    <div class="separation"></div>
+    <div class="corps-formulaire">
+      <div class="gauche">
+        <h3> • entrer l'id du personnel que vous souhaitez modifier.</h3> 
+        <div class="groupe">
+              <label for="id">ID *  </label>
+                <input type="number" id="id" value="id" name="id" required>
+        </div>
+        <h3>• entrer les nouveaux informations.</h3>
+        <div class="groupe">
+            <label for="nomComplet">Nom Complet  <span class="star"
+                >*</span> </label>
+                <input type="text" placeholder=" nom complet" required
+                class="input" id="nom" name="nom">
+        </div>
+        <div class="groupe">
+            <label for="date_naissance">Date naissance <span class="star"
+                >*</span> </label><br>
+                <input type="date"required
+                class="input" id="date_naissance" name="date_naissance">
+             </div>
+             <div class="groupe">
+                <label for="date_embauche">Date embauche  <span class="star"
+                    >*</span> </label><br>
+                    <input type="date" required
+                    class="input" id="date_embauche" name="date_embauche">
+                 </div>
+        <div class="groupe">
+            <label for="service">Service  <span class="star"
+                >*</span> </label><br>
+                <input type="text" placeholder= " Service" required
+                class="input" id="service" name="service">
+        </div>
+        <div class="groupe">
+            <label for="fonction">Fonction  <span class="star"
+                >*</span> </label><br>
+                <input type="text" placeholder= " Fonction" required
+                class="input" id="fonction" name="fonction">
+        </div>
+        <div class="groupe">
+            <label for="salaire">Salaire  <span class="star"
+                >*</span> </label><br>
+                <input type="text" placeholder= " Salaire" required
+                class="input" id="salaire" name="salaire">
+        </div>
+        <div class="groupe">
+            <label for="prime">Prime  <span class="star"
+                >*</span> </label><br>
+                <input type="text" placeholder= " Prime" required
+                class="input" id="prime">
+        </div>
+    </div>
+
+    <div class="pied-formulaire" align="center">
+      <button class="mod" >modifier</button>
+    </div>
+  </form>
+  <form class="card" action="/fiche_personnel/delete" method="post">
+    <h1>Supprimer un personnel</h1>
+    <div class="separation"></div>
+    <div class="corps-formulaire">
+      <div class="gauche">
+        <h3>• entrer l'id du personnel que vous souhaitez supprimer.</h3> 
+        <div class="groupe">
+              <label for="id">ID *  </label>
+                <input type="number" id="id" value="id" name="id" required>
+        </div>
+
+
+    <div class="pied-formulaire" align="center">
+      <button class="sup">supprimer</button>
+    </div>
+  </form>
+
+</section>
+
+    </body>
+    </html>
